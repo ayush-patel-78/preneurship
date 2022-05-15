@@ -28,17 +28,19 @@ const UserLogin = () => {
     if (res.data) {
       // console.log(typeof (res.data))
       // console.log(res.data)
-      storeToken(res.data.token)
-      let { access_token } = getToken()
-      console.log(access_token)
-      dispatch(setUserToken({ access_token: access_token }))
+      // storeToken(res.data.token)
+      localStorage.setItem("access_token",res.data.token)
+
+      // let { access_token } = getToken()
+      // console.log(access_token)
+      // dispatch(setUserToken({ access_token: access_token }))
       navigate('/dashboard')
     }
   }
-  let { access_token } = getToken()
-  useEffect(() => {
-    dispatch(setUserToken({ access_token: access_token }))
-  }, [access_token, dispatch])
+  // let { access_token } = getToken()
+  // useEffect(() => {
+  //   dispatch(setUserToken({ access_token: access_token }))
+  // }, [access_token, dispatch])
 
 
   return <>

@@ -11,20 +11,20 @@ const Dashboard = () => {
   const handleLogout = () => {
     dispatch(unsetUserInfo({ name: "", email: "" }))
     dispatch(unSetUserToken({ access_token: null }))
-    const { access_token} = getToken();
+    // const { access_token} = getToken();
     // const { logout ,isSuccess} = useLogoutUserQuery(access_token);
-    removeToken()
+    localStorage.removeItem("access_token")
     navigate('/login')
   }
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { access_token } = getToken()
+  const access_token = localStorage.getItem("access_token")
   console.log(access_token)
   const { data, isSuccess } = useGetLoggedUserQuery(access_token)
   console.log(data);
   const [userData, setUserData] = useState({
     email: "",
-    name: ""
+    username: ""
   })
 
   // Store User Data in Local State
@@ -32,7 +32,7 @@ const Dashboard = () => {
     if (data && isSuccess) {
       setUserData({
         email: data.email,
-        name: data.name,
+        username: data.username,
       })
     }
   }, [data, isSuccess])
@@ -42,7 +42,7 @@ const Dashboard = () => {
     if (data && isSuccess) {
       dispatch(setUserInfo({
         email: data.email,
-        name: data.name
+        username: data.username
       }))
     }
   }, [data, isSuccess, dispatch])
@@ -53,7 +53,7 @@ const Dashboard = () => {
       <Grid item sm={4} sx={{ backgroundColor: 'gray', p: 5, color: 'white' }}>
         <h1>Dashboard</h1>
         <Typography variant='h5'>Email: {userData.email}</Typography>
-        <Typography variant='h6'>Name: {userData.name}</Typography>
+        <Typography variant='h6'>Username: {userData.username}</Typography>
         <Button variant='contained' color='warning' size='large' onClick={handleLogout} sx={{ mt: 8 }}>Logout</Button>
       </Grid>
       <Grid item sm={8}>

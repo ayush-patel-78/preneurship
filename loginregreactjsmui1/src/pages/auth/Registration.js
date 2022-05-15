@@ -8,6 +8,9 @@ import Axios from 'axios'
 const Registration = () => {
   const [server_error, setServerError] = useState({})
   const navigate = useNavigate();
+  const [password_error,setPassword_error]=useState({
+    error:""
+  })
   const [registerUser, { isLoading }] = useRegisterUserMutation()
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,23 +23,34 @@ const Registration = () => {
       // password2: data.get('password2'),
       // tc: data.get('tc'),
     }
-    // console.log(actualData)
-    const res = await registerUser(actualData)
-    console.log(res);
-    // const url = "http://127.0.0.1:8000/api/user/register"
-    // Axios.post(url,actualData).then((res)=>console.log(res))
     
-    if (res.error) {
-      // console.log(typeof (res.error.data.errors))
-      // console.log(res.error.data.errors)
-      setServerError(res.error.data)
+    if(actualData.password.length < 8){
+       setPassword_error({["error"]:"Password must be 8 character Long"})
     }
-    if (res.data) {
-      // console.log(typeof (res.data))
-      // console.log(res.data)
-      storeToken(res.data.token)
-      navigate('/dashboard')
+    else
+    {
+      setPassword_error({["error"]:""})
+       // console.log(actualData)
+      const res = await registerUser(actualData)
+      console.log(res);
+      // const url = "http://127.0.0.1:8000/api/user/register"
+      // Axios.post(url,actualData).then((res)=>console.log(res))
+    
+      if (res.error) {
+        // console.log(typeof (res.error.data.errors))
+        // console.log(res.error.data.errors)
+        setServerError(res.error.data)
+      }
+      if (res.data) {
+        // console.log(typeof (res.data))
+        // console.log(res.data)
+        // storeToken(res.data.token)
+        localStorage.setItem("access_token",res.data.token)
+        navigate('/dashboard')
+      }
+
     }
+   
   }
   return <>
     {/* {server_error.non_field_errors ? console.log(server_error.non_field_errors[0]) : ""}
@@ -52,6 +66,7 @@ const Registration = () => {
       {/* {server_error.email ? <Typography style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{server_error.email[0]}</Typography> : ""} */}
       <TextField margin='normal' required fullWidth id='password' name='password' label='Password' type='password' />
       {server_error.password ? <Typography style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{server_error.password[0]}</Typography> : ""}
+      {password_error.error ? <Typography style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{password_error.error}</Typography> : ""}
       {/* <TextField margin='normal' required fullWidth id='password2' name='password2' label='Confirm Password' type='password' /> */}
       {/* {server_error.password2 ? <Typography style={{ fontSize: 12, color: 'red', paddingLeft: 10 }}>{server_error.password2[0]}</Typography> : ""} */}
       {/* <FormControlLabel control={<Checkbox value={true} color="primary" name="tc" id="tc" />} label="I agree to term and condition." /> */}

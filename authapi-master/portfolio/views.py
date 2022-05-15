@@ -17,6 +17,9 @@ class GetStartedAPIView(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+    def perform_update(self, serializer):
+        serializer.save(owner=self.request.user)
+
 
 class ListPortfolio(viewsets.ViewSet):
     serializer_class = PortfolioSerializer
@@ -25,4 +28,4 @@ class ListPortfolio(viewsets.ViewSet):
         queryset = Portfolio.objects.all()
         serializer = PortfolioSerializer(queryset, many=True)
         return Response(serializer.data)
-    
+

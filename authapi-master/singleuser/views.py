@@ -26,6 +26,9 @@ class college_view(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+    def perform_update(self, serializer):
+        serializer.save(owner=self.request.user)
+
 
 class employed_view(viewsets.ModelViewSet):
     queryset = employed.objects.all()
@@ -38,6 +41,8 @@ class employed_view(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+    def perform_update(self, serializer):
+        serializer.save(owner=self.request.user)
 class configuration_view(viewsets.ModelViewSet):
     queryset = configuration_manage.objects.all()
     permission_classes = [AllowAny] #[IsAuthenticated]
@@ -47,4 +52,7 @@ class configuration_view(viewsets.ModelViewSet):
         return configuration_manage.objects.all()
     
     def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+    def perform_update(self, serializer):
         serializer.save(owner=self.request.user)

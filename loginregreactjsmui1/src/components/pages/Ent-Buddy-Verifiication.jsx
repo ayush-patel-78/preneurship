@@ -5,7 +5,69 @@ import s from "./../images/success icon.png"
 import i from "./../images/id card.png"
 import p from "./../images/icons8-camera-24.png"
 import l from "./../images/img3.jpg"
+import { useState } from "react";
 const  BVerify= () => {
+
+  
+  const data = JSON.parse(localStorage.getItem("entrepreneur_data"));
+
+  const [entrepreneurData,setEntrepreneurData] = useState({
+    owner:data.owner,
+    title:"",
+    date:data.date,
+    number:data.number,
+    profile:"",
+    companyname:data.companyname,
+    companydocs:data.companydocs,
+    desc:data.desc,
+    pitch:data.pitch,
+    aadhar:"",
+    Pancard:"",
+    Voterid:"",
+    selfie:""
+  })
+
+  const handleChange = (e)=>{
+    setEntrepreneurData((prevData)=>({...prevData,[e.target.name]:e.target.value}))
+    // console.log(entrepreneurData)
+  }
+
+  // const filedatachange = (e)=>{
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(e.target.files[0]);
+  //   console.log(reader.result)
+  //   setEntrepreneurData((prevData)=>({...prevData,[e.target.name]:reader.result}));
+    
+  // }
+  const handleFilesubmit=(e)=> {
+    const file = e.target.files[0];
+    getBase64(file).then((base64) => {
+      // localStorage["fileBaesd64"] = base64;
+      // console.debug("file stored", base64);
+      // setImage(base64);
+      console.log(base64)
+      setEntrepreneurData((prevData)=>({...prevData,[e.target.name]:base64}));
+
+    });
+  }
+  const getBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+  };
+
+
+
+
+  const submit = ()=>{
+    localStorage.setItem("entrepreneur_data",JSON.stringify(entrepreneurData))
+  }
+
+
+
     return (<>
   <div className="container1">
   <div className="circle1"></div>
@@ -14,14 +76,14 @@ const  BVerify= () => {
     <div className="box1">
       <h2>Its time to verify! <img src={s} alt="" /> </h2>
       <label for=""> <img src={i} alt="" />  Aadhar card <span>*</span></label> <br />
-      <input type="file" name="upload" accept="application/pdf" />
+      <input type="file" name="aadhar" onChange={handleFilesubmit} />
       <label for=""> <img src={i} alt="" /> Pan card</label> <br />
-      <input type="file" name="upload" accept="application/pdf" />
+      <input type="file" name="Pancard" onChange={handleFilesubmit}   />
       <label for=""> <img src={i} alt="" /> Voter ID card</label> <br />
-      <input type="file" name="upload" accept="application/pdf" />
+      <input type="file" name="Voterid" onChange={handleFilesubmit}   />
       <label for=""> <img src={p} alt="" /> Instant picture <span>*</span></label> <br />
-      <input type="file" name="upload" accept="application/pdf" />
-      <Link  to="/entrepreneur/partners/success" className="btn1" type="submit">Next &#62;</Link>
+      <input type="file" name="selfie"   onChange={handleFilesubmit}  />
+      <Link  to="/entrepreneur/partners/success" className="btn1" type="submit" onClick={submit}>Next &#62;</Link>
     </div>
     <div className="box2"><img src={l} alt="" /></div>
   </div>

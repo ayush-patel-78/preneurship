@@ -1,29 +1,31 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 // Define a service using a base URL and expected endpoints
-export const getStartApi = createApi({
+export const EntrepreneurApi = createApi({
   reducerPath: 'getStartApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000/api/' }),
   endpoints: (builder) => ({
-    getStartUser: builder.mutation({
-      query: (user) => {
+    entrepreneurWelcome: builder.mutation({
+      query: (user,access_token) => {
         return {
           url: 'verification/',
           method: 'POST',
           body: user,
           headers: {
             'Content-type': 'application/json',
+            'Authorization': `Token ${access_token}`
           }
         }
       }
     }),
-    getStartedUserData: builder.query({
-      query: () => {
+    entpreneurData: builder.query({
+      query: (access_token) => {
         return {
           url: 'verification/',
           method: 'GET',
           headers: {
             'Content-type': 'application/json',
+            'Authorization': `Token ${access_token}`
           }
         }
       }
@@ -68,4 +70,4 @@ export const getStartApi = createApi({
 })
 
 // export const { useRegisterUserMutation, useLoginUserMutation, useGetLoggedUserQuery, useChangeUserPasswordMutation, useSendPasswordResetEmailMutation, useResetPasswordMutation } = userAuthApi
- export const { useGetStartUserMutation,useGetStartedUserDataQuery  } = getStartApi;
+ export const { useEntrepreneurWelcomeMutation,useEntpreneurDataQuery  } = EntrepreneurApi;

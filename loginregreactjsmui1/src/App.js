@@ -6,6 +6,7 @@ import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
+import login from "./pages/auth/UserLogin"
 import { useSelector } from "react-redux";
 
 
@@ -43,7 +44,8 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="contact" element={<Contact />} />
-            <Route path="login" element={!access_token ? <LoginReg /> : <Navigate to="/entrepreneur/welcome-page" />} />
+            {/* <Route path="login" element={!access_token ? <LoginReg /> : <Navigate to="/entrepreneur/welcome-page" />} /> */}
+            <Route path="login" element={<LoginReg />}/>
             <Route path="sendpasswordresetemail" element={<SendPasswordResetEmail />} />
             <Route path="api/user/reset/:id/:token" element={<ResetPassword />} />
           </Route>

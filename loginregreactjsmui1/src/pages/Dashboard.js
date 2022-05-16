@@ -1,7 +1,7 @@
 import { Button, CssBaseline, Grid, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { unSetUserToken } from '../features/authSlice';
+// import { unSetUserToken } from '../features/authSlice';
 // import { getToken, removeToken } from '../services/LocalStorageService';
 import ChangePassword from './auth/ChangePassword';
 import { useGetLoggedUserQuery,useLogoutUserQuery } from '../services/userAuthApi';
@@ -9,8 +9,8 @@ import { useEffect, useState } from 'react';
 import { setUserInfo, unsetUserInfo } from '../features/userSlice';
 const Dashboard = () => {
   const handleLogout = () => {
-    dispatch(unsetUserInfo({ name: "", email: "" }))
-    dispatch(unSetUserToken({ access_token: null }))
+    // dispatch(unsetUserInfo({ name: "", email: "" }))
+    // dispatch(unSetUserToken({ access_token: null }))
     // const { access_token} = getToken();
     // const { logout ,isSuccess} = useLogoutUserQuery(access_token);
     localStorage.removeItem("access_token")

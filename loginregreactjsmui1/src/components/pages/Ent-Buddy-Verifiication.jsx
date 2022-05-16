@@ -71,8 +71,9 @@ const  BVerify= () => {
     const access_token=localStorage.getItem("access_token")
     const formdata = JSON.parse(localStorage.getItem("entrepreneur_data"))
     console.log(access_token)
-    const res = await postEntrepreneurData({formdata,access_token})
+    const res = await postEntrepreneurData(formdata)
     console.log(res)
+    localStorage.setItem("eid",res.data.id)
     
     
     // const url = "http://127.0.0.1:8000/api/verification/";

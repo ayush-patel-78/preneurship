@@ -91,7 +91,6 @@ export const userAuthApi = createApi({
     }),
     entrepreneurWelcome: builder.mutation({
       query: (user) => {
-        
         const access_token = localStorage.getItem("access_token")
         console.log("user data ",user)
         return {
@@ -105,7 +104,7 @@ export const userAuthApi = createApi({
         }
       }
     }),
-    entpreneurData: builder.query({
+    entrepreneurData: builder.query({
       query: (access_token) => {
         return {
           url: 'verification/',
@@ -118,7 +117,9 @@ export const userAuthApi = createApi({
       }
     }),
     updateEntrepreneurData: builder.mutation({
-      query: ({ actualData,id, access_token }) => {
+      query: ( actualData ) => {
+        const id = localStorage.getItem("eid")
+        const access_token = localStorage.getItem("access_token")
         return {
           url: `verification/${id}/`,
           method: 'PUT',
@@ -129,7 +130,48 @@ export const userAuthApi = createApi({
         }
       }
     }),
+    entrepreneurPortfolioGetData: builder.query({
+      query: (access_token) => {
+        return {
+          url: 'portfolio/',
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Token ${access_token}`
+          }
+        }
+      }
+    }),
+    entrepreneurPortfolioPostData: builder.mutation({
+      query: (actualData) => {
+        const access_token = localStorage.getItem("access_token")
+        return {
+          url: 'portfolio/',
+          method: 'POST',
+          body: actualData,
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Token ${access_token}`
+          }
+        }
+      }
+    }),
+    entrepreneurPortfolioPutData: builder.mutation({
+      query: (actualData) => {
+        const id = localStorage.getItem("portfolio_id")
+        const access_token = localStorage.getItem("access_token")
+        return {
+          url: `portfolio/${id}/`,
+          method: 'PUT',
+          body: actualData,
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Token ${access_token}`
+          }
+        }
+      }
+    }),
   }),
 })
 
-export const { useUpdateEntrepreneurDataMutation,useEntpreneurDataQuery,useEntrepreneurWelcomeMutation,useRegisterUserMutation, useLoginUserMutation, useGetLoggedUserQuery,useLogoutUserQuery, useChangeUserPasswordMutation, useSendPasswordResetEmailMutation, useResetPasswordMutation } = userAuthApi
+export const { useEntrepreneurPortfolioPutDataMutation,useEntrepreneurPortfolioPostDataMutation,useEntrepreneurPortfolioGetDataQuery,useUpdateEntrepreneurDataMutation,useEntrepreneurDataQuery,useEntrepreneurWelcomeMutation,useRegisterUserMutation, useLoginUserMutation, useGetLoggedUserQuery,useLogoutUserQuery, useChangeUserPasswordMutation, useSendPasswordResetEmailMutation, useResetPasswordMutation } = userAuthApi

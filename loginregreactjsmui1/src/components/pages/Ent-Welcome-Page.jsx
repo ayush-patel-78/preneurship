@@ -56,26 +56,26 @@ const  Welcome= () => {
     
     // const jsonData = JSON.stringify(actualData)
     
-    console.log(actualData)
-    try{
-      const res = await postEntrepreneur(actualData,access_token)
-      console.log(res)
-      // if(res){
-      //   setTimeout(()=>{
-      //     window.location.href = "/entrepreneur/welcome-page"
-      //   },3000);
-      // }
+    // console.log(actualData)
+    // try{
+    //   // const res = await postEntrepreneur(actualData)
+    //   // console.log(res)
+    //   // if(res){
+    //   //   setTimeout(()=>{
+    //   //     window.location.href = "/entrepreneur/welcome-page"
+    //   //   },3000);
+    //   // }
       
-    }
-    catch(e){
-       console.log(e);
-    }
+    // }
+    // catch(e){
+    //   //  console.log(e);
+    // }
     
     
     const id = localStorage.getItem("id")
     // localStorage.setItem("e_id",res.data.id)
     const eid = localStorage.getItem("e_id")
-    console.log(eid);
+    // console.log(eid);
     // const resUpdate = await updateEntrepreneurData({actualData,eid,access_token})
     // console.log(resUpdate)
     //   const url = "127.0.0.1:8000/api/verification/";
@@ -101,7 +101,7 @@ const  Welcome= () => {
         <br />
        {/* <h3>Are you looking for a...</h3> */}
        {/* <Link className="E-1-btn1" type="submit" to="/buddy">Partner in business</Link> */}
-       <Button className="E-1-btn1" type="submit" onClick={submit} >Next</Button>
+       <Link className="E-1-btn1" type="submit" onClick={submit} to="/entrepreneur/partners">Next</Link>
         {/* <select name="" id="">
           <option value=""> Select</option> */}
          

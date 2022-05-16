@@ -3,19 +3,59 @@ import "./../css/Buddy-Home.css";
 import h from "./../images/h.png";
 import c from "./../images/c.png";
 import s from "./../images/s.png";
-import { useEntpreneurDataQuery } from "../../services/userAuthApi";
+import { useNavigate } from 'react-router-dom';
+import { useEntrepreneurDataQuery } from "../../services/userAuthApi";
+
+import axios from 'axios'
 // import n from "./../images/n1.webp";
 import {Link} from "react-router-dom"
-const  BHome= () => {  
+import { useState } from "react";
 
-
+const  BHome=  () => {  
   
-  const access_token = localStorage.getItem("access_token")
-  const { data, isSuccess } =  useEntpreneurDataQuery(access_token)
+  const access_token = localStorage.getItem("access_token");
+  
+    // axios({
+    //   method: 'get',
+    //   url: 'http://127.0.0.1:8000/api/verification/',
+    //   headers:{
+    //     'Authorization': `Token ${access_token}`
+    //   }
+    // })
+    //   .then( (response) =>{
+    //     console.log(response)
+    //     setState({["owner"]:response.data[0].title})
+    //     setState({["companyname"]:response.data[0].companyname})
+    //     setState({["desc"]:response.data[0].desc})
+    //     setState({["pitch"]:response.data[0].pitch})
+    //   });
+
+    const { data, isSuccess } =   useEntrepreneurDataQuery(access_token);
+ 
 
   console.log(data);
-
+  // console.log(data.title)
   
+  const [state,setState] = useState({
+    // owner:data[0].title,
+    // companyname:data[0].companyname,
+    // desc:data[0].desc,
+    // pitch:data[0].pitch
+
+  })
+ 
+    
+  // setTimeout(getdata, 300);
+  
+  
+  const navigate = useNavigate()
+  
+  
+
+  const handleLogOut = ()=>{
+    localStorage.removeItem("access_token")
+    navigate('/login')
+  }
   
  
 
@@ -32,9 +72,11 @@ const  BHome= () => {
     </div>
     <div className="E-12-container1">
       <div className="E-12-navbar"> <span>
-          <h5>John dept</h5>
-          <p>Ozone pvt. ltd</p>
-          <Link to="/" className="E-12-notification ">Logout</Link> 
+          {/* <h5>John dept</h5> */}
+          <h5>{state.owner}</h5>
+          {/* <p>Ozone pvt. ltd</p> */}
+          <p>{state.companyname}</p>
+          <Link to="/login" onClick={handleLogOut} className="E-12-notification ">Logout</Link> 
           {/* <Link to="./buddy-messages" className="E-12-notification "> <span>Inbox</span>
   <span className="E-12-badge">+</span>
 </Link>  */}
@@ -46,9 +88,11 @@ const  BHome= () => {
     </div>
     <div className="E-12-box2">
       <label type="text"> Your Product description is</label>
-      <input /> <br/>
+      {/* <input /> */}
+      <div>{state.desc}</div> <br/>
       <label type="text">Your Pitch is</label>
-      <input /> <br/>
+      {/* <input /> */}
+      <div>{state.pitch}</div> <br/>
       {/* <div className="E-12-product-section">
         <label for="">Images</label> <br/>
         <span><img src={l} alt=""/></span>

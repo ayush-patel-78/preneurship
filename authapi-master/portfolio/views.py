@@ -12,7 +12,7 @@ class GetStartedAPIView(viewsets.ModelViewSet):
     serializer_class = PortfolioSerializer
 
     def get_queryset(self):
-        return self.request.user.all()
+        return self.request.user.portfolio.all()
     
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

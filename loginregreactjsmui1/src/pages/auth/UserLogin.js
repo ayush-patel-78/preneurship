@@ -30,6 +30,7 @@ const UserLogin = () => {
       // console.log(res.data)
       // storeToken(res.data.token)
       localStorage.setItem("access_token",res.data.token)
+      localStorage.setItem("id",res.data.user.id)
 
       // let { access_token } = getToken()
       // console.log(access_token)

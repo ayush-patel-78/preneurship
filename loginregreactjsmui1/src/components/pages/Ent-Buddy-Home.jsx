@@ -3,7 +3,7 @@ import "./../css/Buddy-Home.css";
 import h from "./../images/h.png";
 import c from "./../images/c.png";
 import s from "./../images/s.png";
-import { useEntpreneurDataQuery } from "../../services/entrepreneurApi";
+import { useEntpreneurDataQuery } from "../../services/userAuthApi";
 // import n from "./../images/n1.webp";
 import {Link} from "react-router-dom"
 const  BHome= () => {  

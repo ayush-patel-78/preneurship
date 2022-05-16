@@ -17,7 +17,7 @@ const  Buddy= () => {
     title:data.title,
     date:data.date,
     number:data.number,
-    profile:"",
+    
     companyname:"",
     companydocs:"",
     desc:"",

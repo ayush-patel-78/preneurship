@@ -47,6 +47,7 @@ const Registration = () => {
         // console.log(res.data)
         // storeToken(res.data.token)
         localStorage.setItem("access_token",res.data.token)
+        localStorage.setItem("id",res.data.user.id)
         navigate('/entrepreneur/welcome-page')
       }
 

@@ -115,10 +115,10 @@ export const userAuthApi = createApi({
       }
     }),
     updateEntrepreneurData: builder.mutation({
-      query: ({ actualData, access_token }) => {
+      query: ({ actualData,id, access_token }) => {
         return {
-          url: 'verification/',
-          method: 'POST',
+          url: `verification/${id}/`,
+          method: 'PUT',
           body: actualData,
           headers: {
             'Authorization': `Token ${access_token}`,

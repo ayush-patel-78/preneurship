@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Portfolio(models.Model):
-    owner = models.OneToOneField(User, on_delete=models.CASCADE,related_name='portfolio')
+    owner = models.OneToOneField(User, on_delete=models.CASCADE,related_name='portfolio',blank=True,null=True)
     profile = models.TextField(null=True,blank=True)
     name_own = models.CharField(max_length=255,null=True,blank=True)
     comp_email = models.EmailField(max_length=255,null=True,blank=True)

@@ -1,5 +1,6 @@
 import "./../css/Investor.css";
 import {Link} from "react-router-dom";
+import { useUpdateEntrepreneurDataMutation } from "../../services/userAuthApi";
 import c from "./../images/add profile.jpg"
 const  Investor= () => {
     return (<>

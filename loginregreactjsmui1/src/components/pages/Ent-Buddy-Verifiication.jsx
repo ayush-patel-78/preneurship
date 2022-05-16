@@ -6,17 +6,19 @@ import i from "./../images/id card.png"
 import p from "./../images/icons8-camera-24.png"
 import l from "./../images/img3.jpg"
 import { useState } from "react";
+import Axios from 'axios'
+import { useEntrepreneurWelcomeMutation } from "../../services/entrepreneurApi";
 const  BVerify= () => {
 
   
   const data = JSON.parse(localStorage.getItem("entrepreneur_data"));
-
+  const [postEntrepreneurData,{isLoading}]=useEntrepreneurWelcomeMutation();
   const [entrepreneurData,setEntrepreneurData] = useState({
-    owner:data.owner,
-    title:"",
+    
+    title:data.title,
     date:data.date,
     number:data.number,
-    profile:"",
+    
     companyname:data.companyname,
     companydocs:data.companydocs,
     desc:data.desc,
@@ -27,10 +29,10 @@ const  BVerify= () => {
     selfie:""
   })
 
-  const handleChange = (e)=>{
-    setEntrepreneurData((prevData)=>({...prevData,[e.target.name]:e.target.value}))
-    // console.log(entrepreneurData)
-  }
+  // const handleChange = (e)=>{
+  //   setEntrepreneurData((prevData)=>({...prevData,[e.target.name]:e.target.value}))
+  //   // console.log(entrepreneurData)
+  // }
 
   // const filedatachange = (e)=>{
   //   const reader = new FileReader();
@@ -47,7 +49,9 @@ const  BVerify= () => {
       // setImage(base64);
       console.log(base64)
       setEntrepreneurData((prevData)=>({...prevData,[e.target.name]:base64}));
+      console.log(entrepreneurData.aadhar)
 
+      
     });
   }
   const getBase64 = (file) => {
@@ -62,8 +66,17 @@ const  BVerify= () => {
 
 
 
-  const submit = ()=>{
-    localStorage.setItem("entrepreneur_data",JSON.stringify(entrepreneurData))
+  const submit = async ()=>{
+    localStorage.setItem("entrepreneur_data",JSON.stringify(entrepreneurData));
+    const access_token=localStorage.getItem("access_token")
+    // const formdata = localStorage.getItem("entrepreneur_data")
+    console.log(access_token)
+    const res = await postEntrepreneurData(entrepreneurData,access_token)
+    console.log(res)
+    
+    // const url = "http://127.0.0.1:8000/api/verification/";
+    // Axios.post(url,entrepreneurData,access_token).then((res)=>{console.log(res)})
+  
   }
 
 

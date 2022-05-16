@@ -13,8 +13,8 @@ const  Buddy= () => {
   // const [image, setImage] = useState("");
 
   const [entrepreneurData,setEntrepreneurData] = useState({
-    owner:data.owner,
-    title:"",
+    
+    title:data.title,
     date:data.date,
     number:data.number,
     profile:"",
@@ -48,7 +48,7 @@ const  Buddy= () => {
       // setImage(base64);
       console.log(base64)
       setEntrepreneurData((prevData)=>({...prevData,[e.target.name]:base64}));
-      console.log(entrepreneurData.companydocs)
+      // console.log(entrepreneurData.companydocs)
     });
   }
   const getBase64 = (file) => {

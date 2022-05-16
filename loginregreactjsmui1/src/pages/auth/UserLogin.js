@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { setUserToken } from '../../features/authSlice';
-import { getToken, storeToken } from '../../services/LocalStorageService';
+// import { getToken, storeToken } from '../../services/LocalStorageService';
 import { useLoginUserMutation } from '../../services/userAuthApi';
 
 const UserLogin = () => {
@@ -34,7 +34,7 @@ const UserLogin = () => {
       // let { access_token } = getToken()
       // console.log(access_token)
       // dispatch(setUserToken({ access_token: access_token }))
-      navigate('/dashboard')
+      navigate('/entrepreneur/welcome-page')
     }
   }
   // let { access_token } = getToken()

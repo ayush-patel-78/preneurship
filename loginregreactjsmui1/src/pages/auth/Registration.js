@@ -23,6 +23,7 @@ const Registration = () => {
       // password2: data.get('password2'),
       // tc: data.get('tc'),
     }
+
     
     if(actualData.password.length < 8){
        setPassword_error({["error"]:"Password must be 8 character Long"})
@@ -30,7 +31,7 @@ const Registration = () => {
     else
     {
       setPassword_error({["error"]:""})
-       // console.log(actualData)
+       console.log(actualData)
       const res = await registerUser(actualData)
       console.log(res);
       // const url = "http://127.0.0.1:8000/api/user/register"
@@ -46,7 +47,7 @@ const Registration = () => {
         // console.log(res.data)
         // storeToken(res.data.token)
         localStorage.setItem("access_token",res.data.token)
-        navigate('/dashboard')
+        navigate('/entrepreneur/welcome-page')
       }
 
     }

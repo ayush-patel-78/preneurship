@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 class Portfolio(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE,related_name='portfolio')
-    profile = models.ImageField(null=True)
+    profile = models.TextField(null=True,blank=True)
     name_own = models.CharField(max_length=255,null=True,blank=True)
     comp_email = models.EmailField(max_length=255,null=True,blank=True)
     comp_contact = models.IntegerField(max_length=255,null=True,blank=True)

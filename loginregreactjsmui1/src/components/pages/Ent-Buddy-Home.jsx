@@ -3,9 +3,26 @@ import "./../css/Buddy-Home.css";
 import h from "./../images/h.png";
 import c from "./../images/c.png";
 import s from "./../images/s.png";
+import { useEntpreneurDataQuery } from "../../services/entrepreneurApi";
 // import n from "./../images/n1.webp";
 import {Link} from "react-router-dom"
-const  BHome= () => {
+const  BHome= () => {  
+
+
+  
+  const access_token = localStorage.getItem("access_token")
+  const { data, isSuccess } =  useEntpreneurDataQuery(access_token)
+
+  console.log(data);
+
+  
+  
+ 
+
+//  Frontend developer entrepreneurData ke ander pura data aa gya hai display kaha karana hai kaise karana hai dekh lena 
+
+
+
     return (
     <>
        <div className="E-12-navbar2">

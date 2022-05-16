@@ -1,34 +1,15 @@
-// import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-// import LoginReg from "./pages/auth/LoginReg";
-// import ResetPassword from "./pages/auth/ResetPassword";
-// import SendPasswordResetEmail from "./pages/auth/SendPasswordResetEmail";
-// import Contact from "./pages/Contact";
-// import Dashboard from "./pages/Dashboard";
-// import Home from "./pages/Home";
-// import Layout from "./pages/Layout";
-// import { useSelector } from "react-redux";
-// function App() {
-//   const { access_token } = useSelector(state => state.auth)
-//   return (
-//     <>
-//       <BrowserRouter>
-//         <Routes>
-//           <Route path="/" element={<Layout />}>
-//             <Route index element={<Home />} />
-//             <Route path="contact" element={<Contact />} />
-//             <Route path="login" element={!access_token ? <LoginReg /> : <Navigate to="/dashboard" />} />
-//             <Route path="sendpasswordresetemail" element={<SendPasswordResetEmail />} />
-//             <Route path="api/user/reset/:id/:token" element={<ResetPassword />} />
-//           </Route>
-//           <Route path="/dashboard" element={access_token ? <Dashboard /> : <Navigate to="/login" />} />
-//           <Route path="*" element={<h1>Error 404 Page not found !!</h1>} />
-//         </Routes>
-//       </BrowserRouter>
-//     </>
-//   );
-// }
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import LoginReg from "./pages/auth/LoginReg";
+import ResetPassword from "./pages/auth/ResetPassword";
+import SendPasswordResetEmail from "./pages/auth/SendPasswordResetEmail";
+import Contact from "./pages/Contact";
+import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
+import Layout from "./pages/Layout";
+import { useSelector } from "react-redux";
 
-// export default App;
+
+
 
 
 
@@ -49,33 +30,65 @@ import BHome from "./components/pages/Ent-Buddy-Home";
 import BProfile from "./components/pages/Ent-Buddy-Profile";
 import FSuccess from "./components/pages/Ent-Final-Success.jsx";
 
-import { BrowserRouter, Route,Routes } from "react-router-dom";
-function App() {
-  return (
-    <BrowserRouter>
-     <Routes>
 
-     
-      <Route path="/" element={<Welcome/>} exact />
-      <Route path="/entrepreneur/partners" element={<Buddy/>} exact />
-      <Route path="/entrepreneur/partners/verification" element={<BVerify/>} exact />
-      <Route path="/entrepreneur/partners/success" element={<BSuccess/>} exact />
-      <Route path="/entrepreneur/portfolio" element={<Investor/>} exact />
+
+
+function App() {
+  // const { access_token } = useSelector(state => state.auth)
+  const access_token = localStorage.getItem("access_token");
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="login" element={!access_token ? <LoginReg /> : <Navigate to="/entrepreneur/welcome-page" />} />
+            <Route path="sendpasswordresetemail" element={<SendPasswordResetEmail />} />
+            <Route path="api/user/reset/:id/:token" element={<ResetPassword />} />
+          </Route>
+          {/* <Route path="/entrepreneur/welcome-page" element={access_token ? <Welcome /> : <Navigate to="/login" />} /> */}
+          <Route path="/entrepreneur/welcome-page" element={<Welcome /> } />
+          <Route path="/entrepreneur/partners" element={<Buddy/>} exact />
+          <Route path="/entrepreneur/partners/verification" element={<BVerify/>} exact />
+          <Route path="/entrepreneur/partners/success" element={<BSuccess/>} exact />
+          <Route path="/entrepreneur/portfolio" element={<Investor/>} exact />
  
-      <Route path="/enterpreneur/portfolio/success" element={<ISuccess/>} exact />
-      <Route path="/enterpreneur/portfolio/overview" element={<IOverView/>} exact />
-      <Route path="/entrepreneur/partners/setting" element={<BSetting/>} exact />
-      <Route path="/buddy-account-type-change" element={<BChange/>} exact />
+          <Route path="/enterpreneur/portfolio/success" element={<ISuccess/>} exact />
+          <Route path="/enterpreneur/portfolio/overview" element={<IOverView/>} exact />
+          <Route path="/entrepreneur/partners/setting" element={<BSetting/>} exact />
+          <Route path="/buddy-account-type-change" element={<BChange/>} exact />
+
+          <Route path="/enterpreneur/portfolio/details" element={<IPortfolio/>} exact />
+          <Route path="/entrepreneur/release" element={<Release/>} exact />
+          <Route path="/entrepreneur/partners/home" element={<BHome/>} exact />
+          <Route path="/entrepreneur/partners/profile" element={<BProfile/>} exact />
      
-      <Route path="/enterpreneur/portfolio/details" element={<IPortfolio/>} exact />
-      <Route path="/entrepreneur/release" element={<Release/>} exact />
-      <Route path="/entrepreneur/partners/home" element={<BHome/>} exact />
-      <Route path="/entrepreneur/partners/profile" element={<BProfile/>} exact />
-     
-      <Route path="/enterpreneur/final-success" element={<FSuccess/>} exact />
-      </Routes>
-    </BrowserRouter>
+          <Route path="/enterpreneur/final-success" element={<FSuccess/>} exact />
+          <Route path="*" element={<h1>Error 404 Page not found !!</h1>} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
 export default App;
+
+
+
+
+// // import { BrowserRouter, Route,Routes } from "react-router-dom";
+// function App() {
+//   return (
+//     <BrowserRouter>
+//      <Routes>
+
+     
+//       <Route path="/entrepreneur/welcome-page" element={<Welcome/>} exact />
+
+//       </Routes>
+//     </BrowserRouter>
+//   );
+// }
+
+// export default App;

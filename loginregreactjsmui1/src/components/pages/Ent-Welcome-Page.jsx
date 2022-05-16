@@ -4,8 +4,11 @@ import {Link} from "react-router-dom";
 import {useEntrepreneurWelcomeMutation,useUpdateEntrepreneurDataMutation,useEntpreneurDataQuery} from '../../services/userAuthApi'
 import { useState } from "react";
 import Axios from 'axios';
+import { Button } from "@mui/material";
 const  Welcome= () => {
   
+  
+
   const [postEntrepreneur,{isLoading}]=useEntrepreneurWelcomeMutation()
   const [updateEntrepreneurData]=useUpdateEntrepreneurDataMutation()
   const access_token = localStorage.getItem("access_token")
@@ -39,20 +42,42 @@ const  Welcome= () => {
  
 
   const submit = async ()=>{
+  
+    
+
     localStorage.setItem("entrepreneur_data",JSON.stringify(entrepreneurData))
     const formData = JSON.parse(localStorage.getItem("entrepreneur_data"))
+    console.log(formData);
     const actualData ={
       title:formData.title,
       date:formData.date,
       number:formData.number
     }
-    console.log(`actual data is : ${actualData}`)
-    const res = await postEntrepreneur({actualData,access_token})
-    console.log(`post request response is : ${res}`);
+    
+    // const jsonData = JSON.stringify(actualData)
+    
+    console.log(actualData)
+    try{
+      const res = await postEntrepreneur(actualData,access_token)
+      console.log(res)
+      // if(res){
+      //   setTimeout(()=>{
+      //     window.location.href = "/entrepreneur/welcome-page"
+      //   },3000);
+      // }
+      
+    }
+    catch(e){
+       console.log(e);
+    }
+    
+    
     const id = localStorage.getItem("id")
-   
-    const resUpdate = await updateEntrepreneurData({actualData,id,access_token})
-    console.log(resUpdate)
+    // localStorage.setItem("e_id",res.data.id)
+    const eid = localStorage.getItem("e_id")
+    console.log(eid);
+    // const resUpdate = await updateEntrepreneurData({actualData,eid,access_token})
+    // console.log(resUpdate)
     //   const url = "127.0.0.1:8000/api/verification/";
     //   Axios.post(url,demoState,access_token).then((res)=>{console.log(res)})
   }
@@ -76,7 +101,7 @@ const  Welcome= () => {
         <br />
        {/* <h3>Are you looking for a...</h3> */}
        {/* <Link className="E-1-btn1" type="submit" to="/buddy">Partner in business</Link> */}
-       <Link className="E-1-btn1" type="submit" onClick={submit} to="/entrepreneur/partners">Next</Link>
+       <Button className="E-1-btn1" type="submit" onClick={submit} >Next</Button>
         {/* <select name="" id="">
           <option value=""> Select</option> */}
          

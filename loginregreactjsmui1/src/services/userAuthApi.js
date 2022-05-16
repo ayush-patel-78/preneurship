@@ -90,7 +90,10 @@ export const userAuthApi = createApi({
       }
     }),
     entrepreneurWelcome: builder.mutation({
-      query: ({user,access_token}) => {
+      query: (user) => {
+        
+        const access_token = localStorage.getItem("access_token")
+        console.log("user data ",user)
         return {
           url: 'verification/',
           method: 'POST',

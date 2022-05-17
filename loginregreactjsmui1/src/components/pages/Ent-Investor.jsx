@@ -221,25 +221,25 @@ const  Investor=  () => {
     <div className="E-5-box2">
         <h3 for="">Add details</h3> <br/>
         <label >Owner Name</label> <br/>
-        {/* <input type="text" name="name_own" onChange={handleChange} value={EntrepreneurPortfolioData.name_own} id=""/> <br/> */}
-        <input type="text" name="name_own" onChange={handleChange} id=""/> <br/>
+        <input type="text" name="name_own" onChange={handleChange} value={EntrepreneurPortfolioData.name_own ? EntrepreneurPortfolioData.name_own : " "} id=""/> <br/>
+        {/* <input type="text" name="name_own" onChange={handleChange} id=""/> <br/> */}
         <label >Company Email</label> <br/>
-        {/* <input type="text" name="comp_email" onChange={handleChange} value={EntrepreneurPortfolioData.comp_email} id=""/> <br/> */}
+        <input type="text" name="comp_email" onChange={handleChange} value={EntrepreneurPortfolioData.comp_email ? EntrepreneurPortfolioData.comp_email : " "} id=""/> <br/>
         
-        <input type="text" name="comp_email" onChange={handleChange}  id=""/> <br/>
+        {/* <input type="text" name="comp_email" onChange={handleChange}  id=""/> <br/> */}
         <label >Company Contact No.</label> <br/>
-        {/* <input type="text" name="comp_contact"  onChange={handleChange} value={EntrepreneurPortfolioData.comp_contact} id=""/> <br/> */}
+        <input type="text" name="comp_contact"  onChange={handleChange} value={EntrepreneurPortfolioData.comp_contact ? EntrepreneurPortfolioData.comp_contact:""} id=""/> <br/>
         
-        <input type="text" name="comp_contact"  onChange={handleChange}  id=""/> <br/>
+        {/* <input type="text" name="comp_contact"  onChange={handleChange}  id=""/> <br/> */}
         <label >Company Name</label> <br/>
-        {/* <input type="text" name="comapanyname" onChange={handleChange} value={EntrepreneurPortfolioData.companyname} id=""/> <br/> */}
-        <input type="text" name="companyname" onChange={handleChange}  id=""/> <br/>
+        <input type="text" name="comapanyname" onChange={handleChange} value={EntrepreneurPortfolioData.companyname ? EntrepreneurPortfolioData.companyname:" "} id=""/> <br/>
+        {/* <input type="text" name="companyname" onChange={handleChange}  id=""/> <br/> */}
         <label >Company Description</label> <br/>
-        {/* <input type="text" name="desc" onChange={handleChange} value={EntrepreneurPortfolioData.desc} id=""/> <br/> */}
-        <input type="text" name="desc" onChange={handleChange}  id=""/> <br/>
+        <input type="text" name="desc" onChange={handleChange} value={EntrepreneurPortfolioData.desc ? EntrepreneurPortfolioData.desc:""} id=""/> <br/>
+        {/* <input type="text" name="desc" onChange={handleChange}  id=""/> <br/> */}
         <label >Company Pitch</label> <br/>
-        {/* <input type="text" name="pitch" onChange={handleChange} value={EntrepreneurPortfolioData.pitch} id=""/> <br/> */}
-        <input type="text" name="pitch" onChange={handleChange} id=""/> <br/>
+        <input type="text" name="pitch" onChange={handleChange} value={EntrepreneurPortfolioData.pitch ? EntrepreneurPortfolioData.pitch:" "} id=""/> <br/>
+        {/* <input type="text" name="pitch" onChange={handleChange} id=""/> <br/> */}
         
     <Link className="E-5-btn1" to="/enterpreneur/portfolio/overview" onClick={submit} type="submit" >Next &#62;</Link> 
 

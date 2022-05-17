@@ -39,16 +39,19 @@ const handleChange = (e)=>{
   
 }
 
-const submit = ()=>{
+async function submit(){
   localStorage.setItem("EntrepreneurPortfolioData",JSON.stringify(EntrepreneurPortfolioData))
   const actualData = {
-    price_release:EntrepreneurPortfolioData.price_release
+    price_release:EntrepreneurPortfolioData.price_release,
+    ready:true,
 
   }
-  const EntrepreneurPortfolioData_id = localStorage.getItem("entrepreneurPortfolio_id");
-  console.log("Data passed to the put:",actualData)
-  const responseOfPortfolioPUT = EntrepreneurPortfolioPutData(actualData);
+  console.log(actualData);
+  // const EntrepreneurPortfolioData_id = localStorage.getItem("entrepreneurPortfolio_id");
+  console.log("Data passed to the put:",actualData);
+  const responseOfPortfolioPUT = await EntrepreneurPortfolioPutData(actualData)
   console.log("Response of portfolio PUT request:",responseOfPortfolioPUT);
+
 
 
 }

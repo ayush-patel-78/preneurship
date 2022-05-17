@@ -10,7 +10,7 @@ class Portfolio(models.Model):
     profile = models.TextField(null=True,blank=True)
     name_own = models.CharField(max_length=255,null=True,blank=True)
     comp_email = models.EmailField(max_length=255,null=True,blank=True)
-    comp_contact = models.IntegerField(max_length=255,null=True,blank=True)
+    comp_contact = models.IntegerField(null=True,blank=True)
     companyname=models.TextField(null=True,blank=True)
     desc=models.TextField(null=True,blank=True)
     pitch=models.TextField(null=True,blank=True)

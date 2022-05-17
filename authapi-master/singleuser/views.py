@@ -7,14 +7,14 @@ from .models import  school_student,college_student,configuration_manage,employe
 
 # Create your views here.
 class school_view(viewsets.ModelViewSet,):
-    # queryset = school_student.objects.all()
     permission_classes = [IsAuthenticated]#[AllowAny] #
     serializer_class = school_serializer
+    queryset = school_student.objects.all()
     def get_queryset(self):
         return school_student.objects.filter(owner=self.request.user)
     
     def get_object(self):
-        obj = get_object_or_404(self.get_queryset, owner=self.request.user)
+        obj = get_object_or_404(self.queryset, owner=self.request.user)
         self.check_object_permissions(self.request, obj)
         return obj
     

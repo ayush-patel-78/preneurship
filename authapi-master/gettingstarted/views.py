@@ -14,7 +14,7 @@ from .models import Verification
 class GetStartedAPIView(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated] #[AllowAny]
     serializer_class = GetStartedSerializer
-    # queryset = Verification.objects.all()
+    queryset = Verification.objects.all()
     # lookup_field = "owner"
 
     # serializer_class = GetStartedSerializer
@@ -23,7 +23,7 @@ class GetStartedAPIView(viewsets.ModelViewSet):
         return Verification.objects.filter(owner=self.request.user)
 
     def get_object(self):
-        obj = get_object_or_404(self.get_queryset, owner=self.request.user)
+        obj = get_object_or_404(self.queryset, owner=self.request.user)
         self.check_object_permissions(self.request, obj)
         return obj
     

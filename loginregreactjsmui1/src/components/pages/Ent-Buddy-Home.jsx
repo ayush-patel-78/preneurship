@@ -9,43 +9,53 @@ import { useEntrepreneurDataQuery } from "../../services/userAuthApi";
 import axios from 'axios'
 // import n from "./../images/n1.webp";
 import {Link} from "react-router-dom"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getAccordionDetailsUtilityClass } from "@mui/material";
 
 const  BHome=  () => {  
   
   const access_token = localStorage.getItem("access_token");
   
-    // axios({
-    //   method: 'get',
-    //   url: 'http://127.0.0.1:8000/api/verification/',
-    //   headers:{
-    //     'Authorization': `Token ${access_token}`
-    //   }
-    // })
-    //   .then( (response) =>{
-    //     console.log(response)
-    //     setState({["owner"]:response.data[0].title})
-    //     setState({["companyname"]:response.data[0].companyname})
-    //     setState({["desc"]:response.data[0].desc})
-    //     setState({["pitch"]:response.data[0].pitch})
-    //   });
+ function getdata(){
+    axios({
+      method: 'get',
+      url: 'http://127.0.0.1:8000/api/verification/',
+      headers:{
+        'Authorization': `Token ${access_token}`
+      }
+    })
+      .then( (response) =>{
+        console.log(response)
+        setState((prevState)=>({...prevState,["owner"]:response.data[0].title}));
+        setState((prevState)=>({...prevState,["companyname"]:response.data[0].companyname}));
+        setState((prevState)=>({...prevState,["pitch"]:response.data[0].pitch}));
+        setState((prevState)=>({...prevState,["desc"]:response.data[0].desc}));
+        
+      });
 
-    const { data, isSuccess } =   useEntrepreneurDataQuery(access_token);
+  }
+    
+
+    
  
 
-  console.log(data);
+  // console.log(data);
   // console.log(data.title)
   
   const [state,setState] = useState({
-    // owner:data[0].title,
-    // companyname:data[0].companyname,
-    // desc:data[0].desc,
-    // pitch:data[0].pitch
+    owner:"",
+    companyname:"",
+    desc:"",
+    pitch:""
 
   })
- 
+  
+  useEffect(()=>{
+    getdata();
+  
+  },[])
     
-  // setTimeout(getdata, 300);
+ 
   
   
   const navigate = useNavigate()

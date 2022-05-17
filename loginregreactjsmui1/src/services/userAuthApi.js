@@ -158,7 +158,7 @@ export const userAuthApi = createApi({
     }),
     entrepreneurPortfolioPutData: builder.mutation({
       query: (actualData) => {
-        const id = localStorage.getItem("portfolio_id")
+        const id = localStorage.getItem("entrepreneurPortfolio_id")
         const access_token = localStorage.getItem("access_token")
         return {
           url: `portfolio/${id}/`,

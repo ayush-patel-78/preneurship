@@ -9,7 +9,7 @@ class Verification(models.Model):
     date = models.DateField(null=True,blank=True)
     number = models.IntegerField(null=True,blank=True)
 
-    profile = models.ImageField(null=True)
+    profile = models.TextField(null=True)
     companyname = models.TextField(null=True)
     companydocs = models.TextField(null=True,blank=True)
     desc = models.TextField(null=True,blank=True)

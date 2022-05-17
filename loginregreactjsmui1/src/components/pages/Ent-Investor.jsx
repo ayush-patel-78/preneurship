@@ -10,7 +10,8 @@ const  Investor=  () => {
     const [EntrepreneurPortfolioPostData]= useEntrepreneurPortfolioPostDataMutation();
     const [EntrepreneurPortfolioPutData]= useEntrepreneurPortfolioPutDataMutation();
 
-
+    const entData = JSON.parse(localStorage.getItem("EntrepreneurPortfolioData"))
+    // console.log(entData)
     const access_token = localStorage.getItem("access_token")
     const emptyData ={
 
@@ -82,19 +83,10 @@ const  Investor=  () => {
             setEntrepreneurPortfolioData((prevState)=>({...prevState,["open_to_partners"]:response.data[0].open_to_partners}));
             setEntrepreneurPortfolioData((prevState)=>({...prevState,["price_release"]:response.data[0].price_release}));
             setEntrepreneurPortfolioData((prevState)=>({...prevState,["ready"]:response.data[0].ready}));
-
-            
-            // else{
-            //     // const emptyData ={
-
-            //     // }
-            //     // const res = await EntrepreneurPortfolioPostData(emptyData);
-            //     // console.log("response of post request is ",res)
-            //     // localStorage.setItem("entrepreneurPortfolio_id",res.data.id);
-
-            // }
             
           });
+
+      
     
       }
 
@@ -132,6 +124,28 @@ const  Investor=  () => {
         ready:false
 
     })
+    // const [EntrepreneurPortfolioData,setEntrepreneurPortfolioData]= useState({
+    // profile:"",
+    // name_own:entData.name_own,
+    // comp_email:entData.comp_email,
+    // comp_contact:entData.comp_contact,
+    // companyname:entData.companyname,
+    // desc:entData.desc,
+    // pitch:entData.pitch,
+    // valuation:entData.valuation,
+    // sales:entData.sales,
+    // margin:entData.margin,
+    // profit_month:entData.profit_month,
+    // profit_year:entData.profit_year,
+    // owership:entData.owership,
+    // dil_equity:entData.dil_equity,
+    // ls_equity:entData.ls_equity,
+    // open_to_investors:false,
+    // open_to_partners:false,
+    // price_release:"",
+    // ready:false
+
+    // })
 
     const handleChange = (e)=>{
         setEntrepreneurPortfolioData((prevData)=>({...prevData,[e.target.name]:e.target.value}));
@@ -158,6 +172,29 @@ const  Investor=  () => {
 
 
     }
+
+    const handleFilesubmit=(e)=> {
+        const file = e.target.files[0];
+        getBase64(file).then((base64) => {
+          // localStorage["fileBaesd64"] = base64;
+          // console.debug("file stored", base64);
+          // setImage(base64);
+          console.log(base64)
+          setEntrepreneurPortfolioData((prevData)=>({...prevData,[e.target.name]:base64}));
+        //   console.log(entrepreneurData.aadhar)
+    
+          
+        });
+      }
+      const getBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+          reader.readAsDataURL(file);
+        });
+      };
+    
     // if(data[0]){
         
     // }else{
@@ -178,7 +215,7 @@ const  Investor=  () => {
         {/* <span><img src={c} alt=""/></span> */}
         {/* <span><img src={EntrepreneurPortfolioData.profile} alt=""/></span> */}
         <span><img  alt=""/></span>
-        <input type="file"/>
+        <input type="file" onChange={handleFilesubmit} name="profile" />
     </div>
 
     <div className="E-5-box2">
